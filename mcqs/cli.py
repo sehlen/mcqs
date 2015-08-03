@@ -29,7 +29,7 @@ def shuffle_mcqs(examfile, num_versions=2, shuffle_problems=False):
         problems = re.findall(r'%BeginMCProblem(.*?)%EndMCProblem', exam_v, flags=re.DOTALL|re.MULTILINE)
         if shuffle_problems:
             shuffle(problems)
-        exam_v = re.sub(r'%BeginMCProblem(.*?)%EndMCProblem', lambda m: problems.pop(), exam_v, flags=re.DOTALL|re.MULTILINE)
+        exam_v = re.sub(r'%BeginMCProblem(.*?)%EndMCProblem', lambda m: problems.pop(0), exam_v, flags=re.DOTALL|re.MULTILINE)
         fvn = examfile.name[:-4] + "-" + str(v) + ".tex"
         fv = open(fvn, 'w')
         fv.write(exam_v)
